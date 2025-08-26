@@ -12,6 +12,7 @@ spec:
       labels:
         app: hello-app
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: http-echo
           image: hashicorp/http-echo
@@ -19,3 +20,7 @@ spec:
             - "-text=<h1>Versão 2.0</h1>"
           ports:
             - containerPort: 5678
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
